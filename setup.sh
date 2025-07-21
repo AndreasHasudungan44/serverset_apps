@@ -1,0 +1,42 @@
+#!/bin/bash
+
+set -e  # Exit on any error
+
+# --- Check for dnf (Red Hat family) ---
+if ! command -v dnf &> /dev/null; then
+    echo "❌ This script requires a Red Hat-based system with 'dnf' installed."
+    exit 1
+fi
+
+echo "Installing system packages..."
+
+sudo dnf update -y
+sudo dnf install -y \
+    wget curl git gcc gcc-c++ make \
+    openssl-devel libcurl-devel libxml2-devel \
+    zlib-devel libpng-devel \
+    python3 python3-pip python3-venv R
+
+# --- Python virtual environment ---
+echo "Setting up Python virtual environment..."
+
+python3 -m venv ~/quarto-env
+source ~/quarto-env/bin/activate
+
+pip install --upgrade pip
+pip install jupyter pandas matplotlib quarto
+
+# --- Quarto CLI installation ---
+echo "Installing Quarto CLI..."
+
+wget https://quarto.org/download/latest/quarto-linux-amd64.rpm
+sudo dnf install -y ./quarto-linux-amd64.rpm
+rm -f quarto-linux-amd64.rpm
+
+# --- R package installation ---
+echo "📦 Installing R packages..."
+
+Rscript -e "install.packages(c('languageserver', 'tidyverse', 'reticulate', 'rmarkdown', 'knitr'), repos='https://cloud.r-project.org/')"
+
+echo "Setup complete!"
+echo "Activate Python env with: source ~/quarto-env/bin/activate"
