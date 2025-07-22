@@ -4,7 +4,7 @@ set -e  # Exit on any error
 
 # --- Check for dnf (Red Hat family) ---
 if ! command -v dnf &> /dev/null; then
-    echo "❌ This script requires a Red Hat-based system with 'dnf' installed."
+    echo -e "\e[31mThis script requires a Red Hat-based system with 'dnf' installed.\e[0m"
     exit 1
 fi
 
@@ -40,5 +40,5 @@ Rscript -e "install.packages(c('languageserver', 'tidyverse', 'reticulate', 'rma
 Rscript -e install.packages("renv")
 Rscript -e renv::init
 echo "Follow R setup Instructions, Ensure R is installed on the correct level either project level/user level"
-echo "Setup complete!"
+echo -e "\e[1;32mSetup complete!\e[0m"
 echo "Activate Python env with: source ~/quarto-env/bin/activate"
