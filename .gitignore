@@ -1,0 +1,17 @@
+# VS Code
+.vscode/
+
+# Python virtual envs
+.venv/
+venv/
+env/
+
+# R renv cache (optional: keep renv/activate.R and renv.lock)
+renv/library/
+renv/staging/
+
+# RStudio project files
+.Rhistory
+.RData
+.Rproj.user/
+*.Rproj

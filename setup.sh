@@ -34,9 +34,11 @@ sudo dnf install -y ./quarto-linux-amd64.rpm
 rm -f quarto-linux-amd64.rpm
 
 # --- R package installation ---
-echo "📦 Installing R packages..."
+echo "Installing R packages..."
 
 Rscript -e "install.packages(c('languageserver', 'tidyverse', 'reticulate', 'rmarkdown', 'knitr'), repos='https://cloud.r-project.org/')"
-
+Rscript -e install.packages("renv")
+Rscript -e renv::init
+echo "Follow R setup Instructions, Ensure R is installed on the correct level either project level/user level"
 echo "Setup complete!"
 echo "Activate Python env with: source ~/quarto-env/bin/activate"
