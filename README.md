@@ -31,6 +31,6 @@ chmod +x setup_rhel.sh
 #### On macOS Local
 
 ```bash
-chmod +x setup_macos.sh
+chmod +x setup_maclocal.sh
 ./setup_macos.sh
 ```
